@@ -53,5 +53,5 @@
 
 業務効率化したい作業のご相談だけでも歓迎します。お気軽にどうぞ。
 
-- ✉️ Email: **qashinka@proton.me**
+- ✉️ Email: **akagifreeez@gmail.com**
 - 💻 GitHub: [@akagifreeez](https://github.com/akagifreeez)
