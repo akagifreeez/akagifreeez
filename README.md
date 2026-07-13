@@ -34,7 +34,7 @@
 ## できること / What I do
 
 - **エージェント・LLM 基盤** — 既存 LLM API（Claude / OpenAI / Gemini）を活用したツールユースループ・マルチエージェント協調・RAG・MCP。プロンプト設計から組込み・パイプライン化まで。*(自前の ML 学習はしません。)*
-- **耐障害なシステム設計** — retry/backoff・自動再接続・フェイルオーバー・決定論リプレイ・状態機械。テストと GitHub Actions CI を当たり前に回す。
+- **耐障害なシステム設計** — retry/backoff・自動再接続・フェイルオーバー・決定論リプレイ・状態機械。主要プロジェクトにはテスト・GitHub Actions CI を実装(例: conductor 98テスト/CI緑)。
 - **クラウドネイティブ運用** — コンテナ化 → k3s デプロイ → KEDA で scale-to-zero/オートスケール → Cloudflare Tunnel でインバウンド開放ゼロ公開。*(自宅個人運用・公開実証ベース。)*
 - **Web / デスクトップ** — Next.js（App Router）、Tauri（Rust + Web）でのアプリ実装。
 
@@ -123,13 +123,6 @@
 - [emilk/egui #8224](https://github.com/emilk/egui/pull/8224) — Rust 即時モード GUI（★29k）
 
 加えて [ansvisor/ansvisor #147](https://github.com/ansvisor/ansvisor/pull/147)（小規模 OSS・TS）もマージ済み。
-
----
-
-## 📊 統計 / Stats
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=akagifreeez&layout=compact&langs_count=8)](https://github.com/akagifreeez)
-[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=akagifreeez&show_icons=true&hide_rank=true)](https://github.com/akagifreeez)
 
 ---
 
