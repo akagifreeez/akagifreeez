@@ -3,10 +3,11 @@
 # akagifreeez — 冷凍アカギ ❄️
 **@akagifreeez** · 2007年生 / 岩手県 / フリーランス・個人開発
 
-深いシステムを一人で 設計 → 実装 → テスト/CI → 公開 まで通し、
+深いシステムを一人で 設計 → 実装 → テスト/CI → 公開 → 運用 まで通し、
+気象データ × 機械学習の予報補正モデルを毎日自動運用し、
 自作 Web アプリは自宅 Proxmox 上の k3s へコンテナ化してデプロイ・運用、
-過程を Zenn で発信しています。
-*I design, build, test/CI and ship deep systems solo, deploy containerized web apps to a self-hosted Proxmox→k3s cluster, and write up the journey on Zenn.*
+過程を Zenn（技術記事 11 本）で発信しています。
+*I design, build, test/CI and ship deep systems solo — from an ML forecast-correction model running daily to containerized web apps on a self-hosted Proxmox→k3s cluster — and write up the journey on Zenn.*
 
 主要言語 / Core: **TypeScript · Python · Rust**
 
@@ -17,15 +18,18 @@
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
 ![Tauri](https://img.shields.io/badge/Tauri-24C8DB?logo=tauri&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)
+![CUDA](https://img.shields.io/badge/CUDA-76B900?logo=nvidia&logoColor=black)
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 ![Kubernetes (k3s)](https://img.shields.io/badge/Kubernetes_(k3s)-326CE5?logo=kubernetes&logoColor=white)
 ![KEDA](https://img.shields.io/badge/KEDA-326CE5?logo=kubernetes&logoColor=white)
 ![Cloudflare Tunnel](https://img.shields.io/badge/Cloudflare_Tunnel-F38020?logo=cloudflare&logoColor=white)
+![Cloudflare Workers](https://img.shields.io/badge/Cloudflare_Workers-F38020?logo=cloudflare&logoColor=white)
 ![Proxmox VE](https://img.shields.io/badge/Proxmox_VE-E57000?logo=proxmox&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)
 
-[GitHub](https://github.com/akagifreeez) · [Portfolio](https://akagifreeez.github.io) · [Zenn](https://zenn.dev/akagifreeez) · 📧 akagifreeezworks@gmail.com
+[GitHub](https://github.com/akagifreeez) · [Portfolio](https://akagifreeez.net) · [Zenn](https://zenn.dev/akagifreeez) · 📧 akagifreeezworks@gmail.com
 
 </div>
 
@@ -33,23 +37,24 @@
 
 ## できること / What I do
 
-- **エージェント・LLM 基盤** — 既存 LLM API（Claude / OpenAI / Gemini）を活用したツールユースループ・マルチエージェント協調・RAG・MCP。プロンプト設計から組込み・パイプライン化まで。*(自前の ML 学習はしません。)*
+- **エージェント・LLM 基盤** — 既存 LLM API（Claude / OpenAI / Gemini）を活用したツールユースループ・マルチエージェント協調・RAG・MCP。プロンプト設計から組込み・パイプライン化まで。
+- **機械学習（気象データ × ML）** — 気温の予報補正モデルを LightGBM ＋ PyTorch（時系列 Transformer）で構築。特徴量設計・リーク管理・Diebold-Mariano 検定まで実施し、予測生成は毎日自動運用。
 - **耐障害なシステム設計** — retry/backoff・自動再接続・フェイルオーバー・決定論リプレイ・状態機械。主要プロジェクトにはテスト・GitHub Actions CI を実装(例: conductor 98テスト/CI緑)。
-- **クラウドネイティブ運用** — コンテナ化 → k3s デプロイ → KEDA で scale-to-zero/オートスケール → Cloudflare Tunnel でインバウンド開放ゼロ公開。*(自宅個人運用・公開実証ベース。)*
-- **Web / デスクトップ** — Next.js（App Router）、Tauri（Rust + Web）でのアプリ実装。
+- **クラウドネイティブ運用** — コンテナ化 → k3s デプロイ → KEDA で scale-to-zero/オートスケール → Cloudflare Tunnel でインバウンド開放ゼロ公開。Cloudflare R2 へのバックアップ 3 層化と Workers による外形監視も運用。*(自宅個人運用・公開実証ベース。)*
+- **Web / デスクトップ / GPU** — Next.js（App Router）、Tauri（Rust + Web）、CUDA C++ でのアプリ・ツール実装。
 
-> 受託（クライアント案件）の実務はこれからです。掲載しているものは公開リポジトリ・ライブURL・CI で実際に検証できる範囲だけを書いています。
-> *Client/contract work is still ahead of me — everything listed below is verifiable via public repos, live URLs, or green CI.*
+> 受託実績: 2026年7〜8月にクラウドソーシングで大量データ処理を 4 件連続で完遂（計 25 万件超・全件検収通過・納期は最大 8 日前倒し・★5 評価 2 件）。
+> 掲載内容は公開リポジトリ・ライブ URL・CI で実際に検証できる範囲だけを書いています。
 
 ---
 
 ## ピックアップ作品 / Featured
 
-すべて **自作の公開リポジトリ（public original）** です。
-
 ### 🧩 深いシステム / Deep systems
 | Repo | 概要 | Tech |
 |---|---|---|
+| **気温予報補正モデル**（コード非公開・公開準備中） | 米国 GFS 数値予報を気象庁 AMeDAS 実測で補正する ML モデル。LightGBM ＋ PyTorch 時系列 Transformer のブレンドで、検証 1 年（リークなしの時間分割・公平比較）の気温 RMSE を 2.80℃ → 1.20℃ へ改善（GFS 直値比 57% 改善・Diebold-Mariano 検定で有意）。NOAA 公開データ 4 年分（約 26 万ペア）の取得基盤から自前構築し、毎日の予測生成を自動運用 | Python · LightGBM · PyTorch |
+| [**agent-hive**](https://github.com/akagifreeez/agent-hive) | マルチエージェント常駐ハーネス。worktree 分離・blackboard 型タスクボード・承認フロー・checkpoint-resume・使用量集計・複数プロバイダ対応（GLM / Anthropic / Codex OAuth）。依存ゼロの Node コア。テスト 405 本＋CI | JavaScript · Node.js · Electron |
 | [**hl-read**](https://github.com/akagifreeez/hl-read) | 鍵を預けずに使える読取専用の Hyperliquid MCP ツールキット（取引機能を持たない設計）。MCP 16ツール＋retry/backoff・自動再接続の耐障害層 | Python · MCP |
 | [**conductor**](https://github.com/akagifreeez/conductor) | ベンダ非依存 LLM エージェント統制基盤。自作 tool-use ループ＋3バックエンド、実OS隔離サンドボックス（Proxmox LXC / Docker）で snapshot/rollback、決定論リプレイ、グローバル予算。98テスト・CI緑 | Python |
 | [**relayforge**](https://github.com/akagifreeez/relayforge) | 不安定回線向け SRT 多リンク・フェイルオーバー制御＋Mission Control 可視化。決定論的な健全性状態機械（GOOD/DEGRADED/DEAD）、SSE/JSONL テレメトリ。GitHub Pages でゼロインストールのライブ実演（[Live](https://akagifreeez.github.io/relayforge/)・リンク断は約3秒で自動切替） | Python |
@@ -85,9 +90,11 @@
 | [**AlphaView**](https://github.com/akagifreeez/AlphaView) | Sony RAW をネイティブ高速現像するデスクトップアプリ | TypeScript · Rust · Tauri |
 | [**hangar**](https://github.com/akagifreeez/hangar) | VRChat の .unitypackage を Unity 無しで棚卸し・プレビュー・導入追跡（ローカル限定・読取専用・非公式） | TypeScript |
 
-### 🛠 運用ユーティリティ / Utilities
+### 🧰 ユーティリティ / Utilities
 | Repo | 概要 | Tech |
 |---|---|---|
+| [**cuda-grep**](https://github.com/akagifreeez/cuda-grep) | GPU（CUDA）で固定文字列検索する grep 風出力の CLI（Windows） | CUDA |
+| [**cuda-image-dedup**](https://github.com/akagifreeez/cuda-image-dedup) | 重複・類似画像を検出する CLI。pHash を GPU で計算（Windows） | C++ · CUDA |
 | [**claude-status-discord**](https://github.com/akagifreeez/claude-status-discord) | 外部 API（Claude）の障害を監視し Discord / Slack に自動通知。GitHub Actions cron・ゼロ依存 Python | Python |
 
 > ⓘ CarStream は StreamPack ベース。RelayForge 系の冗長/フェイルオーバーは libsrt / SRTLA / MediaMTX に帰属します。帯域集約（bonding）は未測定で「無瞬断」とは書きません — リンク断の自動切替は **約3秒**（切替ギャップ込み）です。
@@ -96,40 +103,37 @@
 
 ## ☁ クラウドネイティブ運用 / Cloud-native ops
 
-**自宅 Proxmox VE 9 → k3s v1.36（2ノード） → KEDA scale-to-zero → Cloudflare Tunnel（インバウンドポート開放ゼロ） → Zenn 発信** という一貫した物語を、自分のインフラ上で実証しています。
+**自宅 Proxmox VE 9 → k3s（2ノード） → KEDA scale-to-zero → Cloudflare Tunnel（インバウンドポート開放ゼロ） → Zenn 発信** という一貫した物語を、自分のインフラ上で実証しています。
 
 | | |
 |---|---|
-| 🟢 Live (cold) | [hello.akagifreeez.net](https://hello.akagifreeez.net) → HTTP 200 / 約15.7s（ゼロからのコールドスタートが実際に起動した証拠） |
-| 🟢 Live (warm) | [hl.akagifreeez.net](https://hl.akagifreeez.net) → HTTP 200 / 約2.9s（hl-read Live がクラスタ上で稼働） |
-| 📈 実測 | コールドスタート **7.2s → 最適化後 3.1s**、ウォーム **0.4s**（Zenn 記事の実測値） |
+| 🟢 Live | [hello.akagifreeez.net](https://hello.akagifreeez.net)（scale-to-zero デモ）/ [hl.akagifreeez.net](https://hl.akagifreeez.net)（hl-read Live）→ ともに HTTP 200 で稼働中 |
+| 📈 実測 | コールドスタート 約3.1s（最適化後・Zenn 記事の実測値）。2026-09 に Cloudflare エッジキャッシュ（TTL 300s）を導入し、ウォーム応答はキャッシュ HIT で短縮 |
+| 💾 運用 | k3s データ / Proxmox VM・CT イメージ / Forgejo ダンプの **バックアップ 3 層**を Cloudflare R2 へ日次退避（etag 照合済み）＋ **Cloudflare Workers** cron（5 分間隔）で自宅サービスの外形監視 |
 | ✍ 記事 | [自宅k3sで『アクセスされた時だけ起きる』Webアプリ — KEDA scale-to-zero × Cloudflare Tunnel](https://zenn.dev/akagifreeez/articles/k3s-scale-to-zero-cloudflare-tunnel) |
 
-> ※ 上の **15.7s** は本日ゼロスケール状態へ最初の 1 リクエストで届いたフルコールドパスの実測（Cloudflare Tunnel 経由）、**3.1s** は Zenn 記事の最適化後ベンチ値です。前提が違うため両方を併記しています。
+構成: Proxmox VE 9 / k3s（2ノード）/ cloudflared を Deployment 配置（インバウンドポート開放ゼロ）/ KEDA core + HTTP Add-on / Next.js standalone / ghcr.io。マニフェスト（Dockerfile・k8s/app.yaml・k8s/scaledobject.yaml）は [hl-read-live](https://github.com/akagifreeez/hl-read-live) に commit 済で再現可能。
 
-構成: Proxmox VE 9 / k3s v1.36（2ノード）/ cloudflared を Deployment 配置（インバウンドポート開放ゼロ）/ KEDA core + HTTP Add-on / Next.js standalone / ghcr.io。マニフェスト（Dockerfile・k8s/app.yaml・k8s/scaledobject.yaml）は [hl-read-live](https://github.com/akagifreeez/hl-read-live) に commit 済で再現可能。
-
-> **Honest notes:** 2ノードの k3s は同一ホスト上に同居しており **真の HA（高可用）ではありません**。インフラは **自宅個人運用・公開実証ベース** であって、本番運用・チーム運用・受託の実務経験ではありません。scale-to-zero／オートスケール／上記のライブ HTTP 200 と実測値は事実として確認済みです。
+> **Honest notes:** 2ノードの k3s は同一ホスト上に同居しており **真の HA（高可用）ではありません**。インフラは **自宅個人運用・公開実証ベース** であって、本番運用・チーム運用・受託のインフラ実務経験ではありません。scale-to-zero／オートスケール／ライブ URL の HTTP 200 は事実として確認済みです。
 
 ---
 
 ## OSS コントリビュート / OSS contributions
 
-外部 OSS にフォークから送り、**マージ済みの PR**（自作プロジェクトではなく貢献として）:
+外部 OSS にフォークから送り、**マージ済みの PR 計 7 本**（核は著名 5 本・自作プロジェクトではなく貢献として）:
 
 - [hahwul/dalfox #1076](https://github.com/hahwul/dalfox/pull/1076) ・ [#1089](https://github.com/hahwul/dalfox/pull/1089) — XSS スキャナ（Go）×2
 - [KaotoIO/kaoto #3273](https://github.com/KaotoIO/kaoto/pull/3273) — Red Hat 系 ローコード統合（TypeScript / React）
 - [finos/git-proxy #1554](https://github.com/finos/git-proxy/pull/1554) — Linux Foundation / FINOS（Node / TypeScript）
 - [emilk/egui #8224](https://github.com/emilk/egui/pull/8224) — Rust 即時モード GUI（★29k）
-
-加えて [ansvisor/ansvisor #147](https://github.com/ansvisor/ansvisor/pull/147)（小規模 OSS・TS）もマージ済み。
+- ほか小規模 2 本: [ansvisor/ansvisor #147](https://github.com/ansvisor/ansvisor/pull/147)（TS）・ [Code-Society-Lab/matrixpy #111](https://github.com/Code-Society-Lab/matrixpy/pull/111)（Python）
 
 ---
 
 ## 連絡 / Contact
 
 - 📧 **akagifreeezworks@gmail.com**
-- ✍ Zenn — [zenn.dev/akagifreeez](https://zenn.dev/akagifreeez)
-- 🌐 Portfolio — [akagifreeez.github.io](https://akagifreeez.github.io)
+- ✍ Zenn — 技術記事 11 本公開: [zenn.dev/akagifreeez](https://zenn.dev/akagifreeez)
+- 🌐 Portfolio — [akagifreeez.net](https://akagifreeez.net)
 
 <div align="center"><sub>正直・控えめに、実装の中身と公開物で語ります。<br><i>Quiet and honest — let the shipped code and live URLs do the talking.</i></sub></div>
