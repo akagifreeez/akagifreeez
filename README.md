@@ -3,11 +3,11 @@
 # akagifreeez — 冷凍アカギ ❄️
 **@akagifreeez** · 2007年生 / 岩手県 / フリーランス・個人開発
 
-深いシステムを一人で 設計 → 実装 → テスト/CI → 公開 → 運用 まで通し、
+ツールも基盤も 設計 → 実装 → テスト/CI → 公開 → 運用 まで一人で通し、
 気象データ × 機械学習の予報補正モデルを毎日自動運用し、
 自作 Web アプリは自宅 Proxmox 上の k3s へコンテナ化してデプロイ・運用、
 過程を Zenn（技術記事 11 本）で発信しています。
-*I design, build, test/CI and ship deep systems solo — from an ML forecast-correction model running daily to containerized web apps on a self-hosted Proxmox→k3s cluster — and write up the journey on Zenn.*
+*I take my projects from design through implementation, test/CI, release and day-to-day operation — solo — from an ML forecast-correction model running daily to containerized web apps on a self-hosted Proxmox→k3s cluster — and write up the journey on Zenn.*
 
 主要言語 / Core: **TypeScript · Python · Rust**
 
@@ -50,7 +50,7 @@
 
 ## ピックアップ作品 / Featured
 
-### 🧩 深いシステム / Deep systems
+### 🧩 主要プロジェクト / Key projects
 | Repo | 概要 | Tech |
 |---|---|---|
 | **気温予報補正モデル**（コード非公開・公開準備中） | 米国 GFS 数値予報を気象庁 AMeDAS 実測で補正する ML モデル。LightGBM ＋ PyTorch 時系列 Transformer のブレンドで、検証 1 年（リークなしの時間分割・公平比較）の気温 RMSE を 2.80℃ → 1.20℃ へ改善（GFS 直値比 57% 改善・Diebold-Mariano 検定で有意）。NOAA 公開データ 4 年分（約 26 万ペア）の取得基盤から自前構築し、毎日の予測生成を自動運用 | Python · LightGBM · PyTorch |
